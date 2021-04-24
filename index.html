@@ -1,43 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+
+
   <head>
+
+
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Currency Exchange Tool</title>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/vs.7.0/css/all.css"  integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27Pmbbk/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"  crossorigin="anonymous"/>
+    <link rel="stylesheet" href="assets/style.css"/>
+
     
-    <link rel="stylesheet" href="assets/style.css" />
-    <title>Currency Exchange Tool</title>
   </head>
 
+
+
   <body>
-    <header class="jumbotron text-center">
-      <h1 class="display-3">Currency Exchange Tool</h1>
-      
-    </header>
+
+   
     <div class="container">
-      <div class="row">
-        <div class="col-sm-4 " id="conversion">
-          <h3>Currency Conversion</h3>
-          <p>Lorem ipsum dolor..</p>
-          <p>Lorem ipsum dolor..</p>
-          <p>Lorem ipsum dolor..</p>
-        </div>
+
+
+      <div class="row">        
+          <h1>Currency Conversion</h1>
+      </div>    
+
+        <div class="date">2021-04-23</div>
+
+        <ul class="currencies">
+          <li class="currency base-currency" id="USD">
+            <img src="http://www.geonames.org/flags/l/us.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#36;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">USD - US Dollar</p>
+              <p class="base-currency-rate">1 USD = 1 USD</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          <li class="currency" id="JPY">
+            <img src="http://www.geonames.org/flags/l/jp.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#165;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">JPY - Japenese Yen</p>
+              <p class="base-currency-rate">1 USD = 111.0401 JPY</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          <li class="currency" id="EUR">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#8364;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">EUR - Euro</p>
+              <p class="base-currency-rate">1 USD = 0.8875 Euro</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          <li class="currency" id="GBP">
+            <img src="http://www.geonames.org/flags/l/gb.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#163;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">GBP - British Pound</p>
+              <p class="base-currency-rate">1 USD = 0.7805 GBP</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          <li class="currency" id="RUB">
+            <img src="http://www.geonames.org/flags/l/ru.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#8381;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">RUB - Russian Ruble</p>
+              <p class="base-currency-rate">1 USD = 66.9615 RUB</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          <li class="currency" id="CNY">
+            <img src="http://www.geonames.org/flags/l/cn.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#20803;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">CNY - Chinese Yuan Reminbi</p>
+              <p class="base-currency-rate">1 USD = 6.7756 CNY</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+
+          
+          <li class="currency" id="INR">
+            <img src="http://www.geonames.org/flags/l/in.gif"  class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#8377;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">INR - Indian Rupee</p>
+              <p class="base-currency-rate">1 USD = 71.1777 INR</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>  
+
+        </ul> 
+
+        <button class="add-currency-btn"><i class="fas fa-long-arrow-alt-left"></i>Add Currency</button>
+
+        <ul class="add-currency-list">
+          <li data-currency="USD" class="disabled"><img src="http://www.geonames.org/flags/l/us.gif" class="flag"><span>USD - US Dollar</span></li>
+          <li data-currency="NZD"><img src="http://www.geonames.org/flags/l/nz.gif" class="flag"><span>NZD - New Zealand Dollar</span></li>
+          <li data-currency="CAD"><img src="http://www.geonames.org/flags/l/ca.gif" class="flag"><span>CAD - Canadian Dollar</span></li>
+          <li data-currency="MXN"><img src="http://www.geonames.org/flags/l/mx.gif" class="flag"><span>MXN - Mexican Peso</span></li>
+          
+        </ul>  
+
+          
+      
+
+
+
         <div class="col-sm-8" id="historical-data">
           <h3>Chart of Historical Data</h3>
           <p>Lorem ipsum dolor..</p>
         </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-6 mx-auto" id="news">
-          <h3>Currency News</h3>
-        </div>
-      </div>
 
-    </div>
+
+      
+
+
+        <div class="row justify-content-center">
+          <div class="col-sm-6 mx-auto" id="news">
+            <h3>Currency News</h3>
+          </div>
+        </div>
+
+  
  
     
     
@@ -45,5 +146,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/script.js"></script>
     <script src="assets/news.js"></script>
+
+
+
   </body>
+
 </html>
+
+
