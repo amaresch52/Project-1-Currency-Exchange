@@ -7,7 +7,7 @@ const hideCurrencyBtn = document.querySelector(".hide-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-const dataURL = "http://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
+const dataURL = "https://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
 
 const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", "JPY", "RUB"];
 let baseCurrency;
