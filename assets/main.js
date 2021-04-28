@@ -1,16 +1,13 @@
-
 // Global Variables
 
 const addCurrencyBtn = document.querySelector(".add-currency-btn");
+
+const hideCurrencyBtn = document.querySelector(".hide-currency-btn");
+
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-
-
-
-// They are going to display by default
-
-const dataURL = "https://api.currencylayer.com/convert?from=EUR&to=GBP&amount=100";
+const dataURL = "http://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
 
 const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", "JPY", "RUB"];
 let baseCurrency;
@@ -22,42 +19,36 @@ let currencies = [
     abbreviation: "USD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/us.gif"
-    rate: 1.1325
   },
   {
     name: "Euro",
     abbreviation: "EUR",
     symbol: "\u20AC",
     flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
-    rate: 1
   },
-  {
-    name: "Japanese Yen",
-    abbreviation: "JPY",
-    symbol: "\u00A5",
-    flagURL: "http://www.geonames.org/flags/l/jp.gif"
-    rate: 125.5600
-  },
+  // {
+  //   name: "Japanese Yen",
+  //   abbreviation: "JPY",
+  //   symbol: "\u00A5",
+  //   flagURL: "http://www.geonames.org/flags/l/jp.gif"
+  // },
   {
     name: "British Pound",
     abbreviation: "GBP",
     symbol: "\u00A3",
     flagURL: "http://www.geonames.org/flags/l/uk.gif"
-    rate: 0.8726
   },
   {
     name: "Australian Dollar",
     abbreviation: "AUD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/au.gif"
-    rate: 1.5923
   },
   {
     name: "Canadian Dollar",
     abbreviation: "CAD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/ca.gif"
-    rate: 1.4976
   },
   {
     name: "Swiss Franc",
@@ -119,12 +110,12 @@ let currencies = [
     symbol: "\u20BA",
     flagURL: "http://www.geonames.org/flags/l/tr.gif"
   },
-  {
-    name: "Russian Ruble",
-    abbreviation: "RUB",
-    symbol: "\u20BD",
-    flagURL: "http://www.geonames.org/flags/l/ru.gif"
-  },
+  // {
+  //   name: "Russian Ruble",
+  //   abbreviation: "RUB",
+  //   symbol: "\u20BD",
+  //   flagURL: "http://www.geonames.org/flags/l/ru.gif"
+  // },
   {
     name: "Indian Rupee",
     abbreviation: "INR",
@@ -226,9 +217,16 @@ let currencies = [
 // Event Listeners
 
 addCurrencyBtn.addEventListener("click", addCurrencyBtnClick);
+const addlist = document.getElementsByClassName("add-currency-list")[0]
 
 function addCurrencyBtnClick(event) {
-  addCurrencyBtn.classList.toggle("open");
+  addlist.style.display = 'block';
+}
+hideCurrencyBtn.addEventListener("click", hideCurrencyBtnClick);
+
+
+function hideCurrencyBtnClick(event) {
+  addlist.style.display = 'none';
 }
 
 addCurrencyList.addEventListener("click", addCurrencyListClick);
@@ -307,7 +305,7 @@ function currenciesListKeyDown(event) {
 
 // Auxiliary Functions
 
-function populateAddCurrencyList() {
+function populateAddCyrrencyList() {
   for(let i=0; i<currencies.length; i++) {
     addCurrencyList.insertAdjacentHTML(
       "beforeend", 
@@ -328,10 +326,15 @@ function populateCurrenciesList() {
 function newCurrenciesListItem(currency) {
   if(currenciesList.childElementCount===0) {
     baseCurrency = currency.abbreviation;
+    console.log('imhere')
     baseCurrencyAmount = 0;
   }
+  baseCurrency = currency.abbreviation;
+  console.log(currenciesList, currency)
   addCurrencyList.querySelector(`[data-currency=${currency.abbreviation}]`).classList.add("disabled");
+  console.log(currencies)
   const baseCurrencyRate = currencies.find(c => c.abbreviation===baseCurrency).rate;
+  console.log(baseCurrency)
   const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
   const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
 
@@ -356,8 +359,8 @@ fetch(dataURL)
     data.rates["EUR"] = 1;
     currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
     currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation]);
+    console.log(currencies)
     populateAddCyrrencyList();
     populateCurrenciesList();
   })
   .catch(err => console.log(err));
-

@@ -8,15 +8,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Currency Exchange Tool</title>
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/vs.7.0/css/all.css"  integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27Pmbbk/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"  crossorigin="anonymous"/>
     <link rel="stylesheet" href="assets/style.css"/>
-
+    <title>Currency Exchange Tool</title>
     
   </head>
 
@@ -24,18 +22,23 @@
 
   <body>
 
+
+    <header class="jumbotron text-center">
+      <h1 class="display-3">Currency Exchange Tool</h1>
+    </header>
+
    
-    <div class="container">
+    <div class="container-currency-exchange-tool">
 
-
-      <div class="row">        
-          <h1>Currency Conversion</h1>
-      </div>    
+      <div class="" id="currency-conversion">
+        <div class="row">        
+            <h1>Currency Conversion</h1>
+        </div>    
 
         <div class="date">2021-04-23</div>
 
         <ul class="currencies">
-          <li class="currency base-currency" id="USD">
+          <!-- <li class="currency base-currency" id="USD">
             <img src="http://www.geonames.org/flags/l/us.gif"  class="flag">
             <div class="info">
               <p class="input"><span class="currency-symbol">&#36;</span><input placeholder="0.0000"></p>
@@ -104,48 +107,42 @@
               <p class="base-currency-rate">1 USD = 71.1777 INR</p>
             </div>
             <span class="close">&times;</span>
-          </li>  
+          </li>   -->
 
         </ul> 
 
         <button class="add-currency-btn"><i class="fas fa-long-arrow-alt-left"></i>Add Currency</button>
 
-        <ul class="add-currency-list">
-          <li data-currency="USD" class="disabled"><img src="http://www.geonames.org/flags/l/us.gif" class="flag"><span>USD - US Dollar</span></li>
-          <li data-currency="NZD"><img src="http://www.geonames.org/flags/l/nz.gif" class="flag"><span>NZD - New Zealand Dollar</span></li>
-          <li data-currency="CAD"><img src="http://www.geonames.org/flags/l/ca.gif" class="flag"><span>CAD - Canadian Dollar</span></li>
-          <li data-currency="MXN"><img src="http://www.geonames.org/flags/l/mx.gif" class="flag"><span>MXN - Mexican Peso</span></li>
+        <ul class="add-currency-list" style="display:none;">
           
+          <button class="hide-currency-btn"><i class="fas fa-long-arrow-alt-left"></i>hide Currency</button>
         </ul>  
-
-          
+      </div>
+      
       
 
-
-
-        <div class="col-sm-8" id="historical-data">
+      <div id="right-column">
+        
+        <div class="" id="historical-data">
           <h3>Chart of Historical Data</h3>
-          <p>Lorem ipsum dolor..</p>
+          <canvas id="myChart"></canvas>
         </div>
-
-
       
+        
+        <div class="" id="news">
+          <h3>Currency News</h3>
 
-
-        <div class="row justify-content-center">
-          <div class="col-sm-6 mx-auto" id="news">
-            <h3>Currency News</h3>
-          </div>
         </div>
 
-  
- 
+      </div>
     
     
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="assets/script.js"></script>
+    <script src="assets/main.js"></script>
     <script src="assets/news.js"></script>
+    <script src="assets/graph.js"></script>
 
 
 
