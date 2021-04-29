@@ -31,6 +31,25 @@ body {
     color: #ffffff;
 }
 
+a:link {
+    color:#000000;
+    text-decoration: none;
+
+}  
+a:visited {
+    color:#686e72;
+    text-decoration: none;
+} 
+a:hover {
+    color:#524b52;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}   
+a:active {
+    color:#867b86
+    text-decoration: none;
+}
+
 
 .container-currency-exchange-tool {
     width: 2000px;
@@ -41,13 +60,11 @@ body {
     left: 20px;
 }
 
-
-}
 .row {
     background-image: linear-gradient(to bottom right, rgb(24, 41, 185), rgb(16, 14, 126), rgb(12, 3, 65));
     /* background-color: rgb(6, 7, 83); */
     text-align: center;
-    padding: 1.75rem;
+
 }
 
 
@@ -75,9 +92,20 @@ body {
     margin-left:250px;
 }
 
-#news {
-    margin-top:350px;
+.news {
+ min-height: 50px;
+ max-width: 350px;
+ background-image: linear-gradient(to bottom right, lightgrey, slategrey);
+ color: black;
+ padding: 3px;
+ border-style: solid;
+ border-width: 1px;
+ border-radius: 3px;
+ 
+
 }
+
+
 
 ul.currencies {
     height: calc(100vh - 40px - 100px - 40px -58px);
@@ -279,7 +307,7 @@ display: block;
     font-weight: bolder;
 }
 
-/*This property is to fit in the small sreen*/
+/*This property is to fit in the small screen*/
 
 @media (max-width: 600px) {
   html { font-size: 14px; }
