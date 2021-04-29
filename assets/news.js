@@ -1,5 +1,13 @@
 
-var header = $("#news-header").text("NEWS");
+var btn = document.querySelector('#btn');
+var selection = document.querySelector('#currencySelector')
+    btn.onclick = (event) => {
+            event.preventDefault();
+            // show the selected index
+            var countrySelected = selection.selectedIndex;
+            console.log(selection.selectedIndex);
+
+
 var row_0 = $("<div>").addClass("news");
 var row_1 = $("<div>").addClass("news");
 var row_2 = $("<div>").addClass("news");
@@ -40,17 +48,19 @@ row_5.append(link_5);
 
 var API_key = "6dbe293da8ce6cc4220f504c0fdba18f";
 var lang = "en";
-var country = [
+var countryList = [
                 "au", "br", "ca", "ch", "cn", "de", "eg", "es", "fr", "gb", 
                 "gr", "hk", "ie", "il", "in", "it", "jp", "nl", "no", "pe",
                 "ph", "pk", "pt", "ro", "ru", "se", "sq", "tw", "ua", "us"
             ];
+//var countrySelected = 29
+var country = countryList[countrySelected]
 
 
 // https://gnews.io/docs/v4#countries
 //var API_key = "541b6746307eec710d2e0a1a4116d575"
 
-fetch("https://gnews.io/api/v4/search?q=currency&lang="+ lang +"&country=" + country[29] + "&token=" + API_key)
+fetch("https://gnews.io/api/v4/search?q=currency&lang="+ lang +"&country=" + country + "&token=" + API_key)
     .then(function (response){
         return response.json();
     })
@@ -77,3 +87,4 @@ fetch("https://gnews.io/api/v4/search?q=currency&lang="+ lang +"&country=" + cou
 
     console.log(link_0)
 
+};

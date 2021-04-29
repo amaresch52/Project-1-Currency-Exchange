@@ -50,6 +50,12 @@ a:active {
     text-decoration: none;
 }
 
+.currencySelect{
+    float: right;
+    padding-right: 50px;
+    padding-bottom: 20px;
+}
+
 
 .container-currency-exchange-tool {
     width: 2000px;
