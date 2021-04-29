@@ -46,7 +46,7 @@ a:hover {
     transition: all 0.3s ease-in-out;
 }   
 a:active {
-    color:#867b86
+    color:#524b52;
     text-decoration: none;
 }
 
