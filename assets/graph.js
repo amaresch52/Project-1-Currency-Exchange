@@ -10,28 +10,41 @@ var rateGBP = [];
 var rateAUD = [];
 var rateCAD = [];
 var rateCHF = [];
+var rateBRL = [];
+var rateCNY = [];
 var chartDate = [];
 var apiYear;
 var myChart;
+var sortedDate = [];
+
+chartDate.sort(function (a, b) {
+  var da = new Date(a).getTime();
+  var db = new Date(b).getTime();
+
+  return da < db ? -1 : da > db ? 1 : 0;
+});
+console.log(chartDate);
+
 async function createChart() {
   await chart();
 
   async function chart() {
     await processApi();
 
+    console.log(chartDate);
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: chartDate,
+        labels: urlYear,
         datasets: [
           {
             label: "USD to EUR",
             data: rateEUR,
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            backgroundColor: "white",
 
-            borderColor: "rgba(255, 99, 132, 1)",
-            borderWidth: 1,
+            borderColor: "rgba(255, 0, 100, 1)",
+           
           },
           {
             label: "USD to GBP",
@@ -50,13 +63,13 @@ async function createChart() {
             label: "USD to CAD",
             data: rateCAD,
             pointBackgroundColor: "white",
-            borderColor: "rgba(153, 100, 100, 1)",
+            borderColor: "rgba(153, 65, 87, 1)",
           },
           {
             label: "USD to CHF",
             data: rateCHF,
             pointBackgroundColor: "white",
-            borderColor: "rgba(133, 100, 100, 1)",
+            borderColor: "rgba(133, 97, 100, 1)",
           },
         ],
 
@@ -113,6 +126,8 @@ async function processApi() {
         dataAud = { date: data.response.date, rate: data.response.rates.AUD };
         dataCad = { date: data.response.date, rate: data.response.rates.CAD };
         dataChf = { date: data.response.date, rate: data.response.rates.CHF };
+        dataBrl = { date: data.response.date, rate: data.response.rates.BRL };
+        dataCny = { date: data.response.date, rate: data.response.rates.CNY };
 
         rateEUR.push(parseFloat(dataEur.rate));
         chartDate.push(dataEur.date);
@@ -120,6 +135,8 @@ async function processApi() {
         rateAUD.push(parseFloat(dataAud.rate));
         rateCAD.push(parseFloat(dataCad.rate));
         rateCHF.push(parseFloat(dataChf.rate));
+        rateBRL.push(parseFloat(dataBrl.rate));
+        rateCNY.push(parseFloat(dataCny.rate));
 
         console.log(dataGbp);
         console.log(dataEur);
@@ -132,4 +149,3 @@ async function processApi() {
 }
 
 createChart();
-
