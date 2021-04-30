@@ -6,6 +6,32 @@
     box-sizing: border-box;
 } 
 
+textarea {
+    background-color: white;
+    border: none;
+    resize: none;
+    color: #000000;
+    border-left: 1px solid black;
+    padding: 10px;
+    width: 150px;
+  
+  }
+
+
+  .saveBtn {
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #06aed5;
+    color: white;
+    width: 80px;
+    padding: 25px;
+  }
+  
+  .saveBtn:hover {
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+  }
 
 .display-3 {
     background-image: linear-gradient(to bottom right,  rgb(25, 23, 151), rgb(19, 6, 92));
