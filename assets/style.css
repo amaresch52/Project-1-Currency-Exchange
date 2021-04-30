@@ -26,8 +26,8 @@ html {
 
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-image: linear-gradient(to top left, rgb(25, 23, 151), rgb(19, 6, 92));
+    font-family: 'arial', sans-serif;
+    background-image: linear-gradient(to top left, rgb(24, 41, 185), rgb(16, 14, 126), rgb(12, 3, 65));
     color: #ffffff;
 }
 
@@ -50,10 +50,15 @@ a:active {
     text-decoration: none;
 }
 
-.currencySelect{
+.currencySelect {
     float: right;
     padding-right: 50px;
     padding-bottom: 20px;
+}
+
+
+#currencySelector {
+    background-color:rgb(203, 226, 248)
 }
 
 
@@ -65,7 +70,6 @@ a:active {
     user-select: none;
     left: 15px;
 }
-
 
 
 .row {
@@ -102,13 +106,28 @@ a:active {
 .news {
  min-height: 50px;
  max-width: 350px;
- background-image: linear-gradient(to bottom right, lightgrey, slategrey);
- color: black;
+ background-image: linear-gradient(to bottom right, lightgrey, rgb(43, 140, 236));
+ color: rgb(25, 3, 153);
  padding: 3px;
  border-style: solid;
  border-width: 1px;
  border-radius: 3px;
 }
+
+
+#btn {
+    background-color: rgb(43, 116, 226); 
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border: none;
+    border-top: 1px solid rgb(9, 27, 87);
+    outline: none;
+    width: 50px;
+    height: 20;
+    cursor: pointer;
+}
+
 
 ul.currencies {
     height: calc(100vh - 40px - 100px - 40px -58px);
@@ -221,7 +240,7 @@ ul.currencies::-webkit-scrollbar-thumb {
 ul.add-currency-list {
     position: absolute;
     bottom: 54px;
-    left: 105%;
+    /* left: 20%; */
     background-color: #f1f1f1;
     color: #333;
     width: 100%;
@@ -236,7 +255,7 @@ ul.add-currency-list li {
     padding: 0.75rem;
     border-bottom: 1px solid #ddd;
     color: black;
-    background-color: rgb(217, 208, 243);
+    background-color:rgb(203, 226, 248)
 }
 
 
@@ -307,7 +326,6 @@ ul.add-currency-list li span {
 
 .add-currency-list.open {
 display: block;
-
 }
 
 
@@ -319,7 +337,7 @@ display: block;
 
 
 .add-currency-btn + ul.add-currency-list li:hover {
-    background-color: #ddd;
+    background-color: rgb(148, 236, 236);
     width: 100%;
 } 
 
@@ -329,10 +347,14 @@ display: block;
     border-bottom: blue;
     font-family: 'arial';
     font-weight: bolder;
-}
+    top: 120px;
+    position:fixed;
+    /* top: 0.5rem;
+    left: 0.5rem;  */
+} 
+
 
 /*This property is to fit in the small screen*/
-
 @media (max-width: 600px) {
   html { font-size: 14px; }
   .container { width: 100%; margin: 0 auto; }
