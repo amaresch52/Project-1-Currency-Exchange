@@ -1,77 +1,110 @@
 @import url('https://fonts.googleapis.com/css?family-Montserrat');
 
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+} 
+
+
+.display-3 {
+    background-image: linear-gradient(to bottom right,  rgb(25, 23, 151), rgb(19, 6, 92));
+    height: 80px;
+    font-family: 'arial';
+    padding: 1px;
+}
+
+
+.jumbotron {
+      padding: 0px;
 }
 
 
 html {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: rgb(0, 0, 49);
+    background-image: linear-gradient(to top left, rgb(25, 23, 151), rgb(19, 6, 92));
     color: #ffffff;
 }
 
 
-.container {
-    width: 500px;
+.container-currency-exchange-tool {
+    width: 2000px;
     margin: 20px auto;
     overflow-x: hidden; 
     position: relative;
     user-select: none;
-    left: 20px;
+    left: 15px;
 }
 
 
-}
+
 .row {
-    background-color: rgb(5, 58, 102);
+    background-image: linear-gradient(to bottom right, rgb(24, 41, 185), rgb(16, 14, 126), rgb(12, 3, 65));
     text-align: center;
-    padding: 1.75rem;
+    padding: 0.60rem;
 }
 
 
 .row h1 {
-    font-size: 1.75rem;
+    font-size: 1.50rem;
 }
 
 
 .date {
-    background-color:rgba(5, 58, 102);
+    background-color:rgba(7, 12, 85, 0.911);
     text-align: right;
-    font-size: 0.60rem;
+    font-size: 1.00rem;
     padding: 0.30rem 2rem 0.30rem 0;
 }
 
+#currency-conversion {
+    float: left;
+    position:relative;
+    margin-left: 50px;
+}
+
+#right-column {
+    float:left;
+    position:relative;
+    margin-left:250px;
+}
+
+#news {
+    margin-top:350px;
+}
 
 ul.currencies {
     height: calc(100vh - 40px - 100px - 40px -58px);
-    background-color: rgba(6, 12, 95, 0.911);
+    background-color: rgba(7, 12, 85, 0.911);
     padding: 0 1.5rem 1rem 1.5rem;
     overflow-y: auto;
 }
  
+
 ul.currencies li {
-    background-color: rgb(173, 206, 233);
-    border-radius: 5px;
+    background-color: rgb(193, 219, 240);
+    color: rgba(7, 12, 85, 0.911);
+    border-radius: 2px;
     list-style: none;
-    padding: 1rem 1rem 0.75rem 1rem;
+    /* padding: 1rem 1rem 0.75rem 1rem; */
+    padding: 0.8px;
     margin-bottom: 1rem;
     position: relative;
 }
+
 
 ul.currencies li:last-child {
     margin-bottom : 0;
 }
 
+
 ul.currencies li.base-currency {
-    background-color: rgb(174, 173, 233);
+    background-color: rgb(203, 226, 248);
 }
 
 
@@ -85,28 +118,30 @@ ul.currencies li.base-currency {
 
 .info {
     display: inline-block;
-    width: 78%;
-}
+    width: 76%;
+    padding: 7px;
+} 
 
 
 .info .input span {
     font-size: 1.5rem;
     display: inline-block;
-    width: 4rem;
+    width: 2.5rem;
     text-align: center;
+    padding: 0.01rem;
 }
 
 
 .info .input input {
-    font-size: 1.5rem;
-    width: 78%;
+    font-size: 1.3rem;
+    width: 74%;
     background-color: transparent;
-    border: 2px solid #ffffff;
+    border: 2px solid rgba(7, 12, 85, 0.911);
     border-radius: 5px;
-    color: #ffffff;
-    padding: 0.3rem;
-    margin-bottom: 0.75rem;
-
+    /* color: #ffffff; */
+    /* padding: 0.3rem; */
+    margin-bottom: 0.05rem;
+    margin-left: 0.80rem;
 }
 
 .info .currency-name {
@@ -114,11 +149,12 @@ ul.currencies li.base-currency {
     font-weight: bold;
     margin-bottom: 0.5rem;
     margin-left: 4rem;
+    /* padding: 10px; */
 }
 
 
 .info .base-currency-rate {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin-left: 4rem;
 }
 
@@ -129,7 +165,7 @@ ul.currencies li .close {
     right: 0;
     padding: 0 0.5rem;
     font-size: 1.5rem;
-    color: grey;
+    color: rgb(104, 102, 102);
     cursor: pointer;
 }
 
@@ -140,7 +176,7 @@ ul.currencies li .close:hover {
 
 /*Scroll bar*/
 ul.currencies::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
 }
 
 
@@ -164,17 +200,17 @@ ul.add-currency-list {
 
 
 ul.add-currency-list li {
-
     list-style:none;
     padding: 0.75rem;
     border-bottom: 1px solid #ddd;
+    color: black;
+    background-color: rgb(217, 208, 243);
 }
 
 
 ul.add-currency-list li.disabled {
-    opacity: 0.7;
+    opacity: 0.3;
     cursor: not-allowed;
-
 }
 
 
@@ -198,9 +234,9 @@ ul.add-currency-list li span {
     font-size: 1.2rem;
     font-weight: bold;
     border: none;
-    border-top: 3px solid black;
+    border-top: 1px solid rgb(9, 27, 87);
     outline: none;
-    width: 100%;
+    width: 400px;
     cursor: pointer;
     transition: 1s;
     position: relative;
@@ -214,32 +250,51 @@ ul.add-currency-list li span {
     font-size: 2rem;
     opacity: 0;
     transition: all 0.25s;
+    width: 100%;
 }
 
-.add-currency-btn.open {
-    background-color: red;
+
+.add-currency-btn {
+    background-color: rgb(43, 116, 226);
+    width: 400px;
 }
 
-.add-currency-btn.open i {
+
+.add-currency-btn i {
     opacity: 1;
     left: 1.25rem;
+    width: 100%;
+}
+
+
+.add-currency-list.open {
+    display: block;
+    width: 400px;
 }
 
 
 /*add-currency-list and .add-currency-btn are siblings*/
-.add-currency-btn.open + ul.add-currency-list li:hover {
+.add-currency-btn + ul.add-currency-list li:hover {
     left: 0;
+    width: 100%;
 }
 
 
-.add-currency-btn.open + ul.add-currency-list li:hover {
+.add-currency-btn + ul.add-currency-list li:hover {
     background-color: #ddd;
+    width: 100%;
 } 
 
 
+.hide-currency-btn {
+    background-color: rgb(127, 202, 221);
+    border-bottom: blue;
+    font-family: 'arial';
+    font-weight: bolder;
+}
+
 /*This property is to fit in the small sreen*/
 
-/*
 @media (max-width: 600px) {
   html { font-size: 14px; }
   .container { width: 100%; margin: 0 auto; }
@@ -253,7 +308,7 @@ ul.add-currency-list li span {
   ul.add-currency-list { bottom: 48px; height: calc(100vh - 80px - 51px); }
   .add-currency-btn i { left: 25%; top:0.65rem; }
 }
- */
+ 
 
 
 

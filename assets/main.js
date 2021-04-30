@@ -1,20 +1,20 @@
-
 // Global Variables
 
+
 const addCurrencyBtn = document.querySelector(".add-currency-btn");
+
+const hideCurrencyBtn = document.querySelector(".hide-currency-btn");
+
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
+const dataURL = "http://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
 
-
-
-// They are going to display by default
-
-const dataURL = "https://api.currencylayer.com/convert?from=EUR&to=GBP&amount=100";
-
-const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", "JPY", "RUB"];
+const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", /*"JPY", "RUB"*/];
 let baseCurrency;
 let baseCurrencyAmount;
+
+//Currency array Object
 
 let currencies = [
   {
@@ -22,42 +22,36 @@ let currencies = [
     abbreviation: "USD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/us.gif"
-    rate: 1.1325
   },
   {
     name: "Euro",
     abbreviation: "EUR",
     symbol: "\u20AC",
     flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
-    rate: 1
   },
   {
     name: "Japanese Yen",
     abbreviation: "JPY",
     symbol: "\u00A5",
     flagURL: "http://www.geonames.org/flags/l/jp.gif"
-    rate: 125.5600
   },
   {
     name: "British Pound",
     abbreviation: "GBP",
     symbol: "\u00A3",
     flagURL: "http://www.geonames.org/flags/l/uk.gif"
-    rate: 0.8726
   },
   {
     name: "Australian Dollar",
     abbreviation: "AUD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/au.gif"
-    rate: 1.5923
   },
   {
     name: "Canadian Dollar",
     abbreviation: "CAD",
     symbol: "\u0024",
     flagURL: "http://www.geonames.org/flags/l/ca.gif"
-    rate: 1.4976
   },
   {
     name: "Swiss Franc",
@@ -226,9 +220,16 @@ let currencies = [
 // Event Listeners
 
 addCurrencyBtn.addEventListener("click", addCurrencyBtnClick);
+const addlist = document.getElementsByClassName("add-currency-list")[0]
 
 function addCurrencyBtnClick(event) {
-  addCurrencyBtn.classList.toggle("open");
+  addlist.style.display = 'block';
+}
+hideCurrencyBtn.addEventListener("click", hideCurrencyBtnClick);
+
+
+function hideCurrencyBtnClick(event) {
+  addlist.style.display = 'none';
 }
 
 addCurrencyList.addEventListener("click", addCurrencyListClick);
@@ -243,6 +244,8 @@ function addCurrencyListClick(event) {
 
 currenciesList.addEventListener("click", currenciesListClick);
 
+
+/* The parentnode is the list Items in the variable   */
 function currenciesListClick(event) {
   if(event.target.classList.contains("close")) {
     const parentNode = event.target.parentNode;
@@ -291,6 +294,8 @@ function currenciesListInputChange(event) {
   }
 }
 
+
+/*blur and event */
 currenciesList.addEventListener("focusout", currenciesListFocusOut);
 
 function currenciesListFocusOut(event) {
@@ -299,15 +304,17 @@ function currenciesListFocusOut(event) {
   else event.target.value = Number(inputValue).toFixed(4);
 }
 
+
 currenciesList.addEventListener("keydown", currenciesListKeyDown);
 
 function currenciesListKeyDown(event) {
   if(event.key==="Enter") event.target.blur();
 }
 
-// Auxiliary Functions
 
-function populateAddCurrencyList() {
+//Auxiliary Functions. 
+
+function populateAddCyrrencyList() {
   for(let i=0; i<currencies.length; i++) {
     addCurrencyList.insertAdjacentHTML(
       "beforeend", 
@@ -318,6 +325,7 @@ function populateAddCurrencyList() {
   }
 }
 
+
 function populateCurrenciesList() {
   for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
     const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
@@ -325,15 +333,22 @@ function populateCurrenciesList() {
   }
 }
 
+
 function newCurrenciesListItem(currency) {
   if(currenciesList.childElementCount===0) {
     baseCurrency = currency.abbreviation;
+    console.log('imhere')
     baseCurrencyAmount = 0;
   }
+  baseCurrency = currency.abbreviation;
+  console.log(currenciesList, currency)
   addCurrencyList.querySelector(`[data-currency=${currency.abbreviation}]`).classList.add("disabled");
+  console.log(currencies)
   const baseCurrencyRate = currencies.find(c => c.abbreviation===baseCurrency).rate;
+  console.log(baseCurrency)
   const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
   const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
+
 
   currenciesList.insertAdjacentHTML(
     "beforeend",
@@ -349,15 +364,21 @@ function newCurrenciesListItem(currency) {
   );
 }
 
+
+
 fetch(dataURL)
   .then(res => res.json())
   .then(data => {
-    document.querySelector(".date").textContent = data.date;
+    document.querySelector(".date").textContent = data.date 
+    
+
     data.rates["EUR"] = 1;
+
+
     currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
     currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation]);
+    console.log(currencies)
     populateAddCyrrencyList();
     populateCurrenciesList();
   })
   .catch(err => console.log(err));
-
