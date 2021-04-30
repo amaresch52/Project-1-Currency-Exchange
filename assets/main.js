@@ -9,11 +9,13 @@ const hideCurrencyBtn = document.querySelector(".hide-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-const dataURL = "http://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
+const dataURL = "https://api.exchangeratesapi.io/v1/latest?access_key=7db2d2da961b9eb1e6b989c6b036b09b";
+
 
 const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", /*"JPY", "RUB"*/];
 let baseCurrency;
 let baseCurrencyAmount;
+
 
 //Currency array Object
 
@@ -30,12 +32,12 @@ let currencies = [
     symbol: "\u20AC",
     flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
   },
-  // {
-  //   name: "Japanese Yen",
-  //   abbreviation: "JPY",
-  //   symbol: "\u00A5",
-  //   flagURL: "http://www.geonames.org/flags/l/jp.gif"
-  // },
+  {
+    name: "Japanese Yen",
+    abbreviation: "JPY",
+    symbol: "\u00A5",
+    flagURL: "http://www.geonames.org/flags/l/jp.gif"
+  },
   {
     name: "British Pound",
     abbreviation: "GBP",
@@ -114,12 +116,12 @@ let currencies = [
     symbol: "\u20BA",
     flagURL: "http://www.geonames.org/flags/l/tr.gif"
   },
-  // {
-  //   name: "Russian Ruble",
-  //   abbreviation: "RUB",
-  //   symbol: "\u20BD",
-  //   flagURL: "http://www.geonames.org/flags/l/ru.gif"
-  // },
+  {
+    name: "Russian Ruble",
+    abbreviation: "RUB",
+    symbol: "\u20BD",
+    flagURL: "http://www.geonames.org/flags/l/ru.gif"
+  },
   {
     name: "Indian Rupee",
     abbreviation: "INR",
@@ -260,16 +262,18 @@ function currenciesListClick(event) {
   }
 }
 
+
 function setNewBaseCurrency(newBaseCurrencyLI) {
   newBaseCurrencyLI.classList.add("base-currency");
   baseCurrency = newBaseCurrencyLI.id;
   const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
   currenciesList.querySelectorAll(".currency").forEach(currencyLI => {
     const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
-    const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
+    const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(2);
     currencyLI.querySelector(".base-currency-rate").textContent = `1 ${baseCurrency} = ${exchangeRate} ${currencyLI.id}`;
   });
 }
+
 
 currenciesList.addEventListener("input", currenciesListInputChange);
 
@@ -280,14 +284,16 @@ function currenciesListInputChange(event) {
     setNewBaseCurrency(event.target.closest("li"));
   }
   const newBaseCurrencyAmount = isNaN(event.target.value) ? 0 : Number(event.target.value);
+  localStorage.setItem("baseCurrencyAmount", newBaseCurrencyAmount);
+  localStorage.setItem("baseCurrencyElement",event.target.closest("li").id);
   if(baseCurrencyAmount!==newBaseCurrencyAmount || isNewBaseCurrency) {
     baseCurrencyAmount = newBaseCurrencyAmount;
     const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
     currenciesList.querySelectorAll(".currency").forEach(currencyLI => {
       if(currencyLI.id!==baseCurrency) {
         const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
-        const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
-        currencyLI.querySelector(".input input").value = exchangeRate*baseCurrencyAmount!==0 ? (exchangeRate*baseCurrencyAmount).toFixed(4) : "";
+        const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(2);
+        currencyLI.querySelector(".input input").value = exchangeRate*baseCurrencyAmount!==0 ? (exchangeRate*baseCurrencyAmount).toFixed(2) : "";
       }
     });
   }
@@ -300,7 +306,7 @@ currenciesList.addEventListener("focusout", currenciesListFocusOut);
 function currenciesListFocusOut(event) {
   const inputValue = event.target.value;
   if(isNaN(inputValue) || Number(inputValue)===0) event.target.value="";
-  else event.target.value = Number(inputValue).toFixed(4);
+  else event.target.value = Number(inputValue).toFixed(2);
 }
 
 
@@ -339,8 +345,9 @@ function populateCurrenciesList() {
   }
 }
 
+
 /* This fonction add new currencies to the currency list
-   the base currency and the rate putting 4 decimals*/
+   the base currency and the rate putting 2 decimals*/
 function newCurrenciesListItem(currency) {
   if(currenciesList.childElementCount===0) {
     baseCurrency = currency.abbreviation;
@@ -354,20 +361,20 @@ function newCurrenciesListItem(currency) {
   const baseCurrencyRate = currencies.find(c => c.abbreviation===baseCurrency).rate;
   console.log(baseCurrency)
   const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
-  const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
+  const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(2) : "";
 
 
   /*Currency abbreviation, currency flag, 
   currency symbol, if base currency amount is not 0
   then is going to be false value if is not 0 it would be
-  baseCurrencyAmount*exchangeRate with 4 decimals, otherwise 
+  baseCurrencyAmount*exchangeRate with 2 decimals, otherwise 
   would be an empty string*/
   currenciesList.insertAdjacentHTML(
     "beforeend",
     `<li class="currency ${currency.abbreviation===baseCurrency ? "base-currency" : ""}" id=${currency.abbreviation}>
       <img src=${currency.flagURL} class="flag">
       <div class="info">
-        <p class="input"><span class="currency-symbol">${currency.symbol}</span><input placeholder="0.0000" value=${inputValue}></p>
+        <p class="input"><span class="currency-symbol">${currency.symbol}</span><input placeholder="0.00" value=${inputValue}></p>
         <p class="currency-name">${currency.abbreviation} - ${currency.name}</p>
         <p class="base-currency-rate">1 ${baseCurrency} = ${exchangeRate} ${currency.abbreviation}</p>
       </div>
@@ -375,6 +382,8 @@ function newCurrenciesListItem(currency) {
     </li>`
   );
 }
+
+
 
 /* We wont to fetch data from the data URL, after 
 get the response we want to apply the JSON, in case of an error
