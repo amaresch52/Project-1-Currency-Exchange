@@ -1,4 +1,6 @@
+
 // Global Variables
+/*Those variables are going to be displayed by default*/
 
 const addCurrencyBtn = document.querySelector(".add-currency-btn");
 
@@ -7,7 +9,7 @@ const hideCurrencyBtn = document.querySelector(".hide-currency-btn");
 const addCurrencyList = document.querySelector(".add-currency-list");
 const currenciesList = document.querySelector(".currencies");
 
-const dataURL = "https://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
+const dataURL = "http://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
 
 const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", /*"JPY", "RUB"*/];
 let baseCurrency;
@@ -242,8 +244,6 @@ function addCurrencyListClick(event) {
 }
 
 currenciesList.addEventListener("click", currenciesListClick);
-
-
 /* The parentnode is the list Items in the variable   */
 function currenciesListClick(event) {
   if(event.target.classList.contains("close")) {
@@ -311,6 +311,11 @@ function currenciesListKeyDown(event) {
 }
 
 
+/* Auxiliary Functions. 
+I choose adjacentHTML instead of using
+innerHTML, cuz adjenct does not corrupt the element inside 
+for and is faster*/
+
 function populateAddCyrrencyList() {
   for(let i=0; i<currencies.length; i++) {
     addCurrencyList.insertAdjacentHTML(
@@ -323,6 +328,10 @@ function populateAddCyrrencyList() {
 }
 
 
+/*For each currency in the initiallyDisplayedCurrencies array
+we wont to find the corresponding currency objet from the
+currencies array in the variable called currency, using the find mwthod.
+ and we add currencies to the currency list*/
 function populateCurrenciesList() {
   for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
     const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
@@ -330,7 +339,8 @@ function populateCurrenciesList() {
   }
 }
 
-
+/* This fonction add new currencies to the currency list
+   the base currency and the rate putting 4 decimals*/
 function newCurrenciesListItem(currency) {
   if(currenciesList.childElementCount===0) {
     baseCurrency = currency.abbreviation;
@@ -347,6 +357,11 @@ function newCurrenciesListItem(currency) {
   const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
 
 
+  /*Currency abbreviation, currency flag, 
+  currency symbol, if base currency amount is not 0
+  then is going to be false value if is not 0 it would be
+  baseCurrencyAmount*exchangeRate with 4 decimals, otherwise 
+  would be an empty string*/
   currenciesList.insertAdjacentHTML(
     "beforeend",
     `<li class="currency ${currency.abbreviation===baseCurrency ? "base-currency" : ""}" id=${currency.abbreviation}>
@@ -361,17 +376,20 @@ function newCurrenciesListItem(currency) {
   );
 }
 
-
-
+/* We wont to fetch data from the data URL, after 
+get the response we want to apply the JSON, in case of an error
+we want to catch the error   */
 fetch(dataURL)
   .then(res => res.json())
   .then(data => {
-    document.querySelector(".date").textContent = data.date 
+    document.querySelector(".date").textContent = data.date  /*.split(".").reverse().join("."): If we want to change date format*/
     
-
+    /* Since EURO is the best currency wont be in data.rate
+    so we cxreate one for that  */
     data.rates["EUR"] = 1;
 
-
+    /* We use the filter method, to keep 
+    only keep the currencies which exist as a key*/
     currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
     currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation]);
     console.log(currencies)
