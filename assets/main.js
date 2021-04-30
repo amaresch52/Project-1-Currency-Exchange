@@ -9,9 +9,11 @@ const currenciesList = document.querySelector(".currencies");
 
 const dataURL = "https://api.exchangeratesapi.io/v1/latest?access_key=8d3f07c5151c6ada2088dfec247bdf82";
 
-const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", "JPY", "RUB"];
+const initiallyDisplayedCurrencies = ["USD", "EUR", "GBP", /*"JPY", "RUB"*/];
 let baseCurrency;
 let baseCurrencyAmount;
+
+//Currency array Object
 
 let currencies = [
   {
@@ -241,6 +243,8 @@ function addCurrencyListClick(event) {
 
 currenciesList.addEventListener("click", currenciesListClick);
 
+
+/* The parentnode is the list Items in the variable   */
 function currenciesListClick(event) {
   if(event.target.classList.contains("close")) {
     const parentNode = event.target.parentNode;
@@ -289,6 +293,8 @@ function currenciesListInputChange(event) {
   }
 }
 
+
+/*blur and event */
 currenciesList.addEventListener("focusout", currenciesListFocusOut);
 
 function currenciesListFocusOut(event) {
@@ -297,13 +303,13 @@ function currenciesListFocusOut(event) {
   else event.target.value = Number(inputValue).toFixed(4);
 }
 
+
 currenciesList.addEventListener("keydown", currenciesListKeyDown);
 
 function currenciesListKeyDown(event) {
   if(event.key==="Enter") event.target.blur();
 }
 
-// Auxiliary Functions
 
 function populateAddCyrrencyList() {
   for(let i=0; i<currencies.length; i++) {
@@ -316,12 +322,14 @@ function populateAddCyrrencyList() {
   }
 }
 
+
 function populateCurrenciesList() {
   for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
     const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
     if(currency) newCurrenciesListItem(currency);
   }
 }
+
 
 function newCurrenciesListItem(currency) {
   if(currenciesList.childElementCount===0) {
@@ -338,6 +346,7 @@ function newCurrenciesListItem(currency) {
   const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
   const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
 
+
   currenciesList.insertAdjacentHTML(
     "beforeend",
     `<li class="currency ${currency.abbreviation===baseCurrency ? "base-currency" : ""}" id=${currency.abbreviation}>
@@ -352,11 +361,17 @@ function newCurrenciesListItem(currency) {
   );
 }
 
+
+
 fetch(dataURL)
   .then(res => res.json())
   .then(data => {
-    document.querySelector(".date").textContent = data.date;
+    document.querySelector(".date").textContent = data.date 
+    
+
     data.rates["EUR"] = 1;
+
+
     currencies = currencies.filter(currency => data.rates[currency.abbreviation]);
     currencies.forEach(currency => currency.rate = data.rates[currency.abbreviation]);
     console.log(currencies)
