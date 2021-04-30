@@ -132,3 +132,4 @@ async function processApi() {
 }
 
 createChart();
+
