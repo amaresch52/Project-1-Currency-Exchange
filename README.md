@@ -1,5 +1,5 @@
 # Project 1 - Currency Exchange Tool 
-# Group 4 - Sara Kanga, Adam Maresch, and Sean McElwain
+Group 4 - Sara Kanga, Adam Maresch, and Sean McElwain
 # Read ME
 # Description
 
@@ -15,7 +15,7 @@ I WANT TO be presented with relevant news articles relating to selected currency
 SO THAT I can be updated on my currency interests 
 
 
-# URL: https://github.com/amaresch52/Project-1-Currency-Exchange
+# URL: https://amaresch52.github.io/Project-1-Currency-Exchange/
 
 # PowerPoint: https://github.com/amaresch52/Project-1-Currency-Exchange/blob/develop/Currency%20Exchange%20Tool.pdf
 
