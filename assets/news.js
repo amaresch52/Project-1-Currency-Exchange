@@ -46,7 +46,7 @@ row_4.append(link_4);
 row_5.append(link_5);
 
 
-var API_key = "6dbe293da8ce6cc4220f504c0fdba18f";
+// var API_key = "6dbe293da8ce6cc4220f504c0fdba18f";
 var lang = "en";
 var countryList = [
                 "au", "br", "ca", "ch", "cn", "de", "eg", "es", "fr", "gb", 
@@ -58,7 +58,7 @@ var country = countryList[countrySelected]
 
 
 // https://gnews.io/docs/v4#countries
-//var API_key = "541b6746307eec710d2e0a1a4116d575"
+var API_key = "541b6746307eec710d2e0a1a4116d575"
 
 fetch("https://gnews.io/api/v4/search?q=currency&lang="+ lang +"&country=" + country + "&token=" + API_key)
     .then(function (response){
